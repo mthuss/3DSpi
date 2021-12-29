@@ -1,4 +1,4 @@
-# 3dspi
+# 3DSpi
 
 A 3DS port of a project from college that calculates π up to N decimal places (this version only prints up to 8) using Newton's formula.
 
