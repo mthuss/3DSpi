@@ -48,7 +48,6 @@ int main(int argc, char **argv)
 			{
 				int P = atoi(mybuf);
 				printf("\npi a %d casas decimais  = %.*f\n",P,P,(double)(floor(pi(P)*pow(10,P))/pow(10,P)));
-//				printf("pi a %s casas decimais: \n", mybuf);
 			} else
 				printf("swkbd event: %d\n", swkbdGetResult(&swkbd));
 		}
@@ -67,28 +66,24 @@ int main(int argc, char **argv)
 
 double pi(int a)
 {
-	//Todas as parcelas são multiplicadas por 6 baseando-se na propriedade de que a(b+c) = ab + ac e que, na fórmula dada, para obter o valor de pi,
-	//a soma de todas as parcelas deve ser multiplicada por 6.
-
-	long double val=3; //Valor inicial de pi a partir da primeira parcela (0.5 * 6)
-	int cont=0, i=2; //i começa em 2 pois o calculo das parcelas começará a partir da segunda, visto que a primeira já possui o valor pré estabelescido
-	long int casaAnterior,casaAtual; //Armazena como um número inteiro o valor de pi até a P-ésima casa decimal, dado por pi*10^P
-
-	while(cont!=3)   //Calcula e soma as parcelas da série infinita indefinidamente até que a P-ésima casa decimal de pi(variavel val) permaneça inalterada
-			//após a soma de 3 parcelas seguidas
+	long double val=3;
+	int cont=0, i=2; 
+	long int casaAnterior,casaAtual;
+	
+	while(cont!=3)   
 	{	
 
-		casaAnterior = floor(val*pow(10,a)); //Armazena o valor de pi até a P-ésima casa decimal como um inteiro antes e depois da soma de uma parcela
+		casaAnterior = floor(val*pow(10,a));
 
-		val+=6*parcela(i); i++; //Calcula a i-ésima parcela da soma e soma ela ao resto
+		val+=6*parcela(i); i++;
 
 
 		casaAtual = floor(val*pow(10,a));
 	
-		if(casaAnterior == casaAtual) //Compara os valores obtidos antes e depois da soma de uma parcela e incrementa o contador caso sejam iguais
+		if(casaAnterior == casaAtual)
 			cont++;
 		else
-			cont=0; //Reinicia o contador caso sejam diferentes
+			cont=0;
 	}
 	return val;
 }
@@ -99,11 +94,10 @@ double parcela(double n)
 
 	if(n==2)
 	{
-		return ((pow((1/2.0),4)*(1/3.0))); //Retorna o valor da segunda parcela da soma, a qual inicia o padrão seguido pelas parcelas seguintes
+		return ((pow((1/2.0),4)*(1/3.0)));
 	}
 	else
 	{
 		return ((((2*n)-3)*parcela(n-1) * pow((1/2.0),2) * ((2*n)-3)/((2*n)-2))/((2*n)-1));
-		//Calcula cada uma das parcelas a partir da fórmula (2n-1)*f(n) = (2n-3)*f(n-1) * (1/2)^2 * (2n-3)/(2n-2)
 	}
 }
