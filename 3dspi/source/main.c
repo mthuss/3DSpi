@@ -47,7 +47,7 @@ int main(int argc, char **argv)
 			if (button != SWKBD_BUTTON_NONE)
 			{
 				int P = atoi(mybuf);
-				printf("\npi = %.*f\n",P,P,(double)(floor(pi(P)*pow(10,P))/pow(10,P)));
+				printf("\npi = %.*f\n",P,(double)(floor(pi(P)*pow(10,P))/pow(10,P)));
 			} else
 				printf("swkbd event: %d\n", swkbdGetResult(&swkbd));
 		}
