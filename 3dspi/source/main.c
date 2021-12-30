@@ -4,14 +4,14 @@
 #include <math.h>
 
 double pi(int);
-double parcela(double);
+double portion(double);
 
 int main(int argc, char **argv)
 {
 	gfxInitDefault();
 	consoleInit(GFX_TOP, NULL);
 
-	printf("Pressione A para calcular pi\n\n");
+	printf("Press A to choose accuracy\n\n");
 	printf("\nSTART: exit\n");
 
 	while (aptMainLoop())
@@ -38,7 +38,7 @@ int main(int argc, char **argv)
 			swkbdSetValidation(&swkbd, SWKBD_ANYTHING, 0, 0);
 			swkbdSetFeatures(&swkbd, SWKBD_FIXED_WIDTH);
 			swkbdSetNumpadKeys(&swkbd, L'ツ', L'益');
-			swkbdSetHintText(&swkbd, "Quantas casas? (Max 8)");
+			swkbdSetHintText(&swkbd, "Accuracy: ");
 			button = swkbdInputText(&swkbd, mybuf, sizeof(mybuf));
 		}
 
@@ -47,7 +47,7 @@ int main(int argc, char **argv)
 			if (button != SWKBD_BUTTON_NONE)
 			{
 				int P = atoi(mybuf);
-				printf("\npi a %d casas decimais  = %.*f\n",P,P,(double)(floor(pi(P)*pow(10,P))/pow(10,P)));
+				printf("\npi = %.*f\n",P,P,(double)(floor(pi(P)*pow(10,P))/pow(10,P)));
 			} else
 				printf("swkbd event: %d\n", swkbdGetResult(&swkbd));
 		}
@@ -67,29 +67,28 @@ int main(int argc, char **argv)
 double pi(int a)
 {
 	long double val=3;
-	int cont=0, i=2; 
-	long int casaAnterior,casaAtual;
+	int count=0, i=2; 
+	long int previous,current;
 	
-	while(cont!=3)   
+	while(count!=3)   
 	{	
 
-		casaAnterior = floor(val*pow(10,a));
+		previous = floor(val*pow(10,a));
 
 		val+=6*parcela(i); i++;
 
-
-		casaAtual = floor(val*pow(10,a));
+		current = floor(val*pow(10,a));
 	
-		if(casaAnterior == casaAtual)
-			cont++;
+		if(previous == current)
+			count++;
 		else
-			cont=0;
+			count=0;
 	}
 	return val;
 }
 
 
-double parcela(double n)
+double portion(double n)
 {
 
 	if(n==2)
@@ -98,6 +97,6 @@ double parcela(double n)
 	}
 	else
 	{
-		return ((((2*n)-3)*parcela(n-1) * pow((1/2.0),2) * ((2*n)-3)/((2*n)-2))/((2*n)-1));
+		return ((((2*n)-3)*portion(n-1) * pow((1/2.0),2) * ((2*n)-3)/((2*n)-2))/((2*n)-1));
 	}
 }
