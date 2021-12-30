@@ -75,7 +75,7 @@ double pi(int a)
 
 		previous = floor(val*pow(10,a));
 
-		val+=6*parcela(i); i++;
+		val+=6*portion(i); i++;
 
 		current = floor(val*pow(10,a));
 	
